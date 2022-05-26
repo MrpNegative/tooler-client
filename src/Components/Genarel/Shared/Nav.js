@@ -9,7 +9,7 @@ const Nav = () => {
     <li><Link to="/">Submenu</Link></li>
     <li><Link to="/" className="whitespace-nowrap">My Portfolio</Link></li>
     <li><Link to="/">Blog</Link></li>
-    <li><Link to="/" className='btn'>LogIn</Link></li>
+    <li><Link to="/login" className='btn'>LogIn</Link></li>
   </>
     
     return (

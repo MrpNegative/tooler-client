@@ -1,6 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import Login from './Components/Authentication/Login';
 import Home from './Components/Genarel/Home/Home';
+import Footer from './Components/Genarel/Shared/Footer';
 import Nav from './Components/Genarel/Shared/Nav';
 
 function App() {
@@ -9,7 +11,9 @@ function App() {
       <Nav></Nav>
       <Routes>
         <Route path='/' element={<Home></Home>}></Route>
+        <Route path='/login' element={<Login></Login>}></Route>
       </Routes>
+      <Footer></Footer>
     </div>
   );
 }
