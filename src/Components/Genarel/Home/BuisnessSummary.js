@@ -6,7 +6,7 @@ import { MdLocalShipping } from "react-icons/md";
 
 const BuisnessSummary = () => {
   return (
-    <div className="my-10">
+    <div className="my-10 text-center">
         <h1 className="text-4xl text-center font-bold my-5">BUSINESS SUMMARY </h1>
       <div class="stats stats-vertical lg:stats-horizontal ">
         <div class="stat">
@@ -14,7 +14,7 @@ const BuisnessSummary = () => {
             <BiWorld />
           </div>
           <div class="stat-value">
-            <CountUp end={79} />
+            <CountUp end={29} />
           </div>
           <div class="text-xl font-bold">Available Countries</div>
         </div>

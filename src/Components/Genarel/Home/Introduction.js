@@ -9,7 +9,7 @@ import { FaHospitalUser } from "react-icons/fa";
 const Introduction = () => {
   return (
     <div className="max-w-5xl mx-auto">
-      <h1 className="lg:text-5xl text-4xl font-bold uppercase">Introduction</h1>
+      <h1 className="lg:text-5xl text-4xl text-center font-bold uppercase">Introduction</h1>
       <div className="grid justify-items-center my-7 grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-5">
         <div class="card w-72 bg-base-100 shadow-xl">
           <div class=" p-5 flex">

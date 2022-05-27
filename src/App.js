@@ -3,17 +3,19 @@ import './App.css';
 import Login from './Components/Authentication/Login';
 import Signup from './Components/Authentication/Signup';
 import Home from './Components/Genarel/Home/Home';
+import Chackout from './Components/Genarel/Others/Chackout';
 import Footer from './Components/Genarel/Shared/Footer';
 import Nav from './Components/Genarel/Shared/Nav';
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <Nav></Nav>
       <Routes>
         <Route path='/' element={<Home></Home>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/signup' element={<Signup></Signup>}></Route>
+        <Route path='/checkout/:id' element={<Chackout></Chackout>}></Route>
       </Routes>
       <Footer></Footer>
     </div>
