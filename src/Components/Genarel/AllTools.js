@@ -1,12 +1,9 @@
 import React from 'react';
 import { useQuery } from 'react-query';
-import useTools from '../../Hooks/useTools';
-import Loading from '../Shared/Loading';
-import ToolsCard from './ToolsCard';
-
-const OurTools = () => {
-    // const [tools] = useTools()
-    const { data, isLoading, refetch } = useQuery("tools", () =>
+import ToolsCard from './Home/ToolsCard';
+import Loading from './Shared/Loading';
+const AllTools = () => {
+    const { data, isLoading, refetch } = useQuery("allTools", () =>
     fetch(`http://localhost:5000/tools`).then(
       (res) => res.json()
     )
@@ -14,18 +11,18 @@ const OurTools = () => {
   if (isLoading) {
       return <Loading></Loading>;
     }
-
-    const newTools = data?.slice(0, 3)
     return (
-        <div className='my-10 container mx-auto'>
+        <div>
+            <div className='my-10 container mx-auto'>
             <h1 className='font-bold text-4xl uppercase lg:text-5xl text-center mb-10'>Our Tools</h1>
             <div className='grid lg:grid-cols-3 gap-5 md:grid-cols-2  grid-cols-1 justify-items-center'>
                {
-                    newTools.map(tool => <ToolsCard tool={tool} key={tool._id}></ToolsCard>)
+                    data?.map(tool => <ToolsCard tool={tool} key={tool._id}></ToolsCard>)
                }
             </div>
+        </div>
         </div>
     );
 };
 
-export default OurTools;
+export default AllTools;

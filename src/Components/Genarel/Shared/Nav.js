@@ -8,9 +8,9 @@ const Nav = () => {
   const [user] = useAuthState(auth)
   const NavItems = <>
     <li><Link to="/">Home</Link></li>
-    <li><Link to="/">Submenu</Link></li>
-    <li><Link to="/">Submenu</Link></li>
-    <li><Link to="/">Submenu</Link></li>
+    <li><Link className="whitespace-nowrap" to="/alltools">All Tools</Link></li>
+    <li><Link to="/">Reviews</Link></li>
+    {user ? <li><Link to="/dashboard">Dashboard</Link></li> : ''}
     <li><Link to="/" className="whitespace-nowrap">My Portfolio</Link></li>
     <li><Link to="/">Blog</Link></li>
     {user? <button className='btn' onClick={()=>{signOut(auth)}}>SignOut</button> : <li><Link to="/login" className='btn'>LogIn</Link></li>}

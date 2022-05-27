@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const ToolsCard = ({tool}) => {
-    const {name, img, description, price, _id } = tool
+    const {name, img, description, price, _id, minimum, available } = tool
     
   return (
     <div>
@@ -17,10 +17,10 @@ const ToolsCard = ({tool}) => {
           <h2 class="text-2xl font-bold">
             {name}
           </h2>
-          <p className="text-left">{description.slice(0, 150)}</p>
+          {description.length > 150 ? <p title={`${description}`} className="text-left">{description.slice(0, 150)}</p> : <p>{description}</p> }
           <div class="">
-            <p className="text-xl mb-1 font-semibold">Available: 900</p>
-            <p className="text-lg font-semibold">Min Order: 50</p>
+            <p className="text-xl mb-1 font-semibold">Available: {available}</p>
+            <p className="text-lg font-semibold">Min Order: {minimum}</p>
             <p className="font-bold my-2 text-2xl">Price: {price}</p>
           </div>
           <button className="btn bg-red-600 text-black hover:text-white"><Link to={`/checkout/${_id}`}>Buy Now</Link></button>
