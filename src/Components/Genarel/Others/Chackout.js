@@ -17,7 +17,7 @@ const Chackout = () => {
   if (isLoading || uloading) {
     return <Loading></Loading>;
   }
-  const { img, price, discription, name, minimum, available } = data;
+  const { img, price, description, name, minimum, available } = data;
 
   // handaleDisable
   const handaleDisable = () => {
@@ -133,6 +133,10 @@ const Chackout = () => {
             </form>
           </div>
         </div>
+      </div>
+      <div className="bg-base-200 p-10 mx-auto w-auto md:w-[500px] mb-10 rounded-md shadow">
+        <h1 className="text-center text-3xl mb-5 font-bold uppercase">Discription</h1>
+        <p className="text-center">{description}</p>
       </div>
     </div>
   );

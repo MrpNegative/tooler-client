@@ -8,7 +8,7 @@ import Loading from "../Shared/Loading";
 const MyOrder = () => {
   const [user] = useAuthState(auth);
   const email = user?.email;
-  const { data, isLoading, error } = useQuery("myorder", () =>
+  const { data, isLoading, refetch } = useQuery("myorder", () =>
     fetch(`http://localhost:5000/order/query?email=${email}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -29,7 +29,7 @@ const MyOrder = () => {
         MY Order
       </h1>
       <div className="overflow-x-auto lg:px-10 md:px-5 px1">
-        <table className="table table-compact w-full">
+        <table className="table table-zebra w-full">
           <thead>
             <tr>
               <th>#</th>
