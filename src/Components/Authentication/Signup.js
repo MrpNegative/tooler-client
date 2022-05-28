@@ -2,57 +2,64 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Loading from "../Genarel/Shared/Loading";
-import { useAuthState, useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from "react-firebase-hooks/auth";
+import {
+  useAuthState,
+  useCreateUserWithEmailAndPassword,
+  useSignInWithGoogle,
+  useUpdateProfile,
+} from "react-firebase-hooks/auth";
 import { auth } from "./firebase.init";
+import useToken from "../Hooks/useToken";
 
 const Signup = () => {
-    const {
-        register,
-        formState: { errors },
-        handleSubmit,
-    } = useForm();
-    const [user] = useAuthState(auth)
-    const navigate = useNavigate();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+  const [user] = useAuthState(auth);
+  const navigate = useNavigate();
   const location = useLocation();
 
   const [mainErrors, setMainErrors] = useState("");
 
   const [createUserWithEmailAndPassword, EPUser, loading, EPError] =
-  useCreateUserWithEmailAndPassword(auth);
+    useCreateUserWithEmailAndPassword(auth);
 
-    const [signInWithGoogle, Euser, Eloading, Eerror] = useSignInWithGoogle(auth);
-   
-    const [updateProfile, updating, Nerror] = useUpdateProfile(auth);
-    
-    const onSubmit = async (data) =>{
-        setMainErrors("")
-        await createUserWithEmailAndPassword(data.email, data.pass)
-        await updateProfile({displayName: data.name})
+  const [signInWithGoogle, Euser, Eloading, Eerror] = useSignInWithGoogle(auth);
 
-    };
-    //page navigation
-    const from = location.state?.from?.pathname || "/";
-    useEffect(() => {
-        if (user) {
-            navigate(from);
-        }
-    }, [user]);
-    //   errors
+  const [updateProfile, updating, Nerror] = useUpdateProfile(auth);
+  // token
+  const [token] = useToken(user);
+
+  const onSubmit = async (data) => {
+    setMainErrors("");
+    await createUserWithEmailAndPassword(data.email, data.pass);
+    await updateProfile({ displayName: data.name });
+  };
+  //page navigation
+  const from = location.state?.from?.pathname || "/";
+  useEffect(() => {
+    if (token) {
+      navigate(from);
+    }
+  }, [token]);
+  //   errors
   useEffect(() => {
     const error = EPError || Eerror || Nerror;
     if (error) {
-        setMainErrors( error?.message?.split('/')[1].split(')')[0]);
+      setMainErrors(error?.message?.split("/")[1].split(")")[0]);
     }
-  }, [EPError, Eerror, Nerror ]);
+  }, [EPError, Eerror, Nerror]);
   //loading
-    if (loading || Eloading || updating) {
-      return <Loading></Loading>;
-    }
-    return (
-        <div className="lg:h-screen my-10">
-      <div class="card  md:w-96 w-72 mx-auto bg-base-100 shadow-xl">
-        <div class="card-body">
-          <h2 class="text-3xl mb-5 font-bold uppercase">Signup</h2>
+  if (loading || Eloading || updating) {
+    return <Loading></Loading>;
+  }
+  return (
+    <div className="lg:h-screen my-10">
+      <div className="card  md:w-96 w-72 mx-auto bg-base-100 shadow-xl">
+        <div className="card-body">
+          <h2 className="text-3xl mb-5 font-bold uppercase">Signup</h2>
           <div>
             <form
               className=" grid grid-rows-1 gap-3"
@@ -61,7 +68,7 @@ const Signup = () => {
               <div>
                 <input
                   placeholder="Your Name"
-                  class="input input-bordered input-secondary w-full max-w-xs"
+                  className="input input-bordered input-secondary w-full max-w-xs"
                   {...register("name", {
                     required: {
                       value: true,
@@ -89,7 +96,7 @@ const Signup = () => {
               <div>
                 <input
                   placeholder="Email"
-                  class="input input-bordered input-secondary w-full max-w-xs"
+                  className="input input-bordered input-secondary w-full max-w-xs"
                   {...register("email", {
                     required: {
                       value: true,
@@ -117,7 +124,7 @@ const Signup = () => {
               <div>
                 <input
                   placeholder="Password"
-                  class="input input-bordered input-secondary w-full max-w-xs"
+                  className="input input-bordered input-secondary w-full max-w-xs"
                   {...register("pass", {
                     required: {
                       value: true,
@@ -142,28 +149,35 @@ const Signup = () => {
                   )}
                 </label>
               </div>
-              <p className="text-left">
-                <Link className="link-hover" to="/">
-                  Forgot Password?
-                </Link>
-              </p>
-              {mainErrors ? <p className="text-left text-red-600 text-xl">{mainErrors}</p> : ''}
+
+              {mainErrors ? (
+                <p className="text-left text-red-600 text-xl">{mainErrors}</p>
+              ) : (
+                ""
+              )}
               <input className="btn w-full" type="submit" />
             </form>
-            <p className="text-left mt-4"> Already have an account
-                <Link className="link-hover" to="/login">
-                  <span className="text-red-600 ml-2">LogIn</span>
-                </Link>
-              </p>
-            <div class="divider">OR</div>
-            <button onClick={()=>{signInWithGoogle()}} className="border-0 w-full btn bg-blue-700 text-white">
+            <p className="text-left mt-4">
+              {" "}
+              Already have an account
+              <Link className="link-hover" to="/login">
+                <span className="text-red-600 ml-2">LogIn</span>
+              </Link>
+            </p>
+            <div className="divider">OR</div>
+            <button
+              onClick={() => {
+                signInWithGoogle();
+              }}
+              className="border-0 w-full btn bg-blue-700 text-white"
+            >
               Continue With Google
             </button>
           </div>
         </div>
       </div>
     </div>
-    );
+  );
 };
 
 export default Signup;

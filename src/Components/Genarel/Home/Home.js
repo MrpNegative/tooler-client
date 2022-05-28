@@ -4,6 +4,8 @@ import { auth } from '../../Authentication/firebase.init';
 import Loading from '../Shared/Loading';
 import Banner from './Banner';
 import BuisnessSummary from './BuisnessSummary';
+import ContactUs from './ContactUs';
+import HomeReview from './HomeReview';
 import Introduction from './Introduction';
 import OurTools from './OurTools';
 
@@ -18,6 +20,8 @@ const Home = () => {
             <BuisnessSummary></BuisnessSummary>
             <OurTools></OurTools>
             <Introduction></Introduction>
+            <HomeReview></HomeReview>
+            <ContactUs></ContactUs>
         </div>
     );
 };

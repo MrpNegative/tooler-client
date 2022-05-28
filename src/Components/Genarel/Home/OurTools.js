@@ -1,11 +1,9 @@
 import React from 'react';
 import { useQuery } from 'react-query';
-import useTools from '../../Hooks/useTools';
 import Loading from '../Shared/Loading';
 import ToolsCard from './ToolsCard';
 
 const OurTools = () => {
-    // const [tools] = useTools()
     const { data, isLoading, refetch } = useQuery("tools", () =>
     fetch(`http://localhost:5000/tools`).then(
       (res) => res.json()

@@ -2,17 +2,22 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Loading from "../Genarel/Shared/Loading";
-import { useAuthState, useSignInWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
+import {
+  useAuthState,
+  useSignInWithEmailAndPassword,
+  useSignInWithGoogle,
+} from "react-firebase-hooks/auth";
 import { auth } from "./firebase.init";
+import useToken from "../Hooks/useToken";
 
 const Login = () => {
-    const {
-        register,
-        formState: { errors },
-        handleSubmit,
-    } = useForm();
-    const [user] = useAuthState(auth)
-    const navigate = useNavigate();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+  const [user] = useAuthState(auth);
+  const navigate = useNavigate();
   const location = useLocation();
 
   const [mainErrors, setMainErrors] = useState("");
@@ -20,36 +25,38 @@ const Login = () => {
   const [signInWithEmailAndPassword, EPUser, loading, EPError] =
     useSignInWithEmailAndPassword(auth);
 
-    const [signInWithGoogle, Euser, Eloading, Eerror] = useSignInWithGoogle(auth);
-   
-    
-    const onSubmit = (data) =>{
-        setMainErrors("")
-        signInWithEmailAndPassword(data.email, data.pass)
-    };
-    //page navigation
-    const from = location.state?.from?.pathname || "/";
-    useEffect(() => {
-        if (user) {
-            navigate(from);
-        }
-    }, [user]);
-    //   errors
+  const [signInWithGoogle, Euser, Eloading, Eerror] = useSignInWithGoogle(auth);
+
+  // token
+  const [token] = useToken(user);
+
+  const onSubmit = (data) => {
+    setMainErrors("");
+    signInWithEmailAndPassword(data.email, data.pass);
+  };
+  //page navigation
+  const from = location.state?.from?.pathname || "/";
+  useEffect(() => {
+    if (token) {
+      navigate(from);
+    }
+  }, [token]);
+  //   errors
   useEffect(() => {
     const error = EPError || Eerror;
     if (error) {
-        setMainErrors( error?.message.split('/')[1].split(')')[0]);
+      setMainErrors(error?.message.split("/")[1].split(")")[0]);
     }
   }, [EPError, Eerror]);
   //loading
-    if (loading || Eloading) {
-      return <Loading></Loading>;
-    }
+  if (loading || Eloading) {
+    return <Loading></Loading>;
+  }
   return (
     <div className="lg:h-screen my-10">
-      <div class="card  md:w-96 w-72 mx-auto bg-base-100 shadow-xl">
-        <div class="card-body">
-          <h2 class="text-3xl mb-5 font-bold uppercase">LogIn</h2>
+      <div className="card  md:w-96 w-72 mx-auto bg-base-100 shadow-xl">
+        <div className="card-body">
+          <h2 className="text-3xl mb-5 font-bold uppercase">LogIn</h2>
           <div>
             <form
               className=" grid grid-rows-1 gap-3"
@@ -58,7 +65,7 @@ const Login = () => {
               <div>
                 <input
                   placeholder="Email"
-                  class="input input-bordered input-secondary w-full max-w-xs"
+                  className="input input-bordered input-secondary w-full max-w-xs"
                   {...register("email", {
                     required: {
                       value: true,
@@ -86,7 +93,7 @@ const Login = () => {
               <div>
                 <input
                   placeholder="Password"
-                  class="input input-bordered input-secondary w-full max-w-xs"
+                  className="input input-bordered input-secondary w-full max-w-xs"
                   {...register("pass", {
                     required: {
                       value: true,
@@ -116,16 +123,27 @@ const Login = () => {
                   Forgot Password?
                 </Link>
               </p>
-              {mainErrors ? <p className="text-left text-red-600 text-xl">{mainErrors}</p> : ''}
+              {mainErrors ? (
+                <p className="text-left text-red-600 text-xl">{mainErrors}</p>
+              ) : (
+                ""
+              )}
               <input className="btn w-full" type="submit" />
             </form>
-            <p className="text-left mt-4"> Dont have an account
-                <Link className="link-hover" to="/signup">
-                  <span className="text-red-600 ml-2">Register</span>
-                </Link>
-              </p>
-            <div class="divider">OR</div>
-            <button onClick={()=>{signInWithGoogle()}} className="border-0 w-full btn bg-blue-700 text-white">
+            <p className="text-left mt-4">
+              {" "}
+              Dont have an account
+              <Link className="link-hover" to="/signup">
+                <span className="text-red-600 ml-2">Register</span>
+              </Link>
+            </p>
+            <div className="divider">OR</div>
+            <button
+              onClick={() => {
+                signInWithGoogle();
+              }}
+              className="border-0 w-full btn bg-blue-700 text-white"
+            >
               Continue With Google
             </button>
           </div>

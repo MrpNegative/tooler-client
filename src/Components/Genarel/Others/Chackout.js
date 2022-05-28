@@ -35,12 +35,14 @@ const Chackout = () => {
       phone: e.target.phone.value,
       address: e.target.address.value,
       quantity: e.target.quantity.value,
-      paid: false
+      price: price,
+      paid: false,
+      status: false,
     };
     console.log(order);
     if (order?.quantity < minimum || order?.quantity > available) {
       setDisable(true);
-      toast.error('check your quantity')
+      toast.error("check your quantity");
       return;
     }
 
@@ -65,7 +67,7 @@ const Chackout = () => {
               if (data.acknowledged) {
                 toast.success("order placed");
                 refetch();
-                // window.location.reload();
+                e.target.reset();
               }
             });
         }
@@ -73,8 +75,8 @@ const Chackout = () => {
   };
   return (
     <div>
-      <div class="hero min-h-screen mb-10 bg-base-200">
-        <div class="hero-content flex-col lg:flex-row">
+      <div className="hero min-h-screen mb-10 bg-base-200">
+        <div className="hero-content flex-col lg:flex-row">
           <div className="md:w-[500px] w-72">
             <img className="lg:p-10 lg:w-full md:w-96" src={img} alt="" />
           </div>
@@ -82,10 +84,10 @@ const Chackout = () => {
             <h1 className="font-bold text-4xl uppercase my-5 text-center">
               Order Detail
             </h1>
-            <h2 className=" font-bold text-2xl">{name}</h2>
+            <h2 className=" font-bold uppercase text-2xl">{name}</h2>
             <h2 className="font-bold my-2 text-2xl ">Price {price}$</h2>
             <h3 className="font-bold text-lg ">Min Order: {minimum}</h3>
-            <h3 className="font-bold text-lg">
+            <h3 className="font-bold text-2xl my-2">
               {" "}
               {available > minimum ? (
                 <>Available: {available}</>
@@ -93,45 +95,34 @@ const Chackout = () => {
                 <span className="text-red-600">Out Of Stock</span>
               )}
             </h3>
+            <h2 className="text-xl font-semibold">Name: {user?.displayName}</h2>
+            <h2 className="text-xl font-semibold">Email: {user?.email}</h2>
             <form
               onChange={handaleDisable}
               onSubmit={placeOrder}
               className="grid my-3 gap-4"
             >
-              <input
-                required
-                type="text"
-                placeholder="Your Name"
-                value={`${user?.displayName}`}
-                class="input input-bordered input-accent w-full "
-              />
-              <input
-                required
-                type="email"
-                placeholder="Email"
-                value={`${user?.email}`}
-                class="input input-bordered input-accent w-full "
-              />
+              
               <input
                 required
                 type="number"
                 placeholder="Phone"
                 name="phone"
-                class="input input-bordered input-accent w-full "
+                className="input input-bordered input-accent w-full "
               />
               <input
                 required
                 type="text"
                 placeholder="Address"
                 name="address"
-                class="input input-bordered input-accent w-full "
+                className="input input-bordered input-accent w-full "
               />
               <input
                 required
                 type="number"
                 name="quantity"
                 placeholder="Quantity"
-                class="input input-bordered input-accent w-full "
+                className="input input-bordered input-accent w-full "
               />
               <input
                 disabled={disable}
