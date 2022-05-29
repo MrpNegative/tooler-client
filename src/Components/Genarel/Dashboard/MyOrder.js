@@ -1,3 +1,4 @@
+import axios from "axios";
 import { signOut } from "firebase/auth";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -21,7 +22,25 @@ const MyOrder = () => {
   }
   if(data?.scam){
     signOut(auth);
-    return  window.location.reload();
+    // return  window.location.reload();
+  }
+
+  // delete user 
+  const deleteOrder = id =>{
+
+    console.log(id);
+    axios.delete(`http://localhost:5000/order/${id}`,{
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+    .then((response) => {
+      console.log(response);
+      const { data } = response;
+      refetch()
+    });
+
+
   }
   return (
     <div>
@@ -64,7 +83,7 @@ const MyOrder = () => {
                   {order.paid ? (
                     "Can not delete"
                   ) : (
-                    <button onClick={()=>{deletOrder(order._id)}} className="btn btn-xs">Delete</button>
+                    <button onClick={()=>{deleteOrder(order._id)}} className="btn btn-xs">Delete</button>
                   )}
                 </td>
               </tr>

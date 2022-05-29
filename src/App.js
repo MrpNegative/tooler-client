@@ -16,6 +16,7 @@ import Nav from "./Components/Genarel/Shared/Nav";
 import AllReview from "./Components/Genarel/AllReview";
 import MyOrder from "./Components/Genarel/Dashboard/MyOrder";
 import MakeAdmin from "./Components/Genarel/Dashboard/Admin/MakeAdmin";
+import UpdateProfile from "./Components/Genarel/Dashboard/UpdateProfile";
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
         >
           <Route index element={<MyProfile></MyProfile>}></Route>
           <Route path="makeadmin" element={<MakeAdmin></MakeAdmin>}></Route>
+          <Route path="updateprofile" element={<UpdateProfile></UpdateProfile>}></Route>
           <Route path="postreview" element={<PostReview></PostReview>}></Route>
           <Route path="myorder" element={<MyOrder></MyOrder>}></Route>
         </Route>
