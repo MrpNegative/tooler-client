@@ -17,6 +17,7 @@ import AllReview from "./Components/Genarel/AllReview";
 import MyOrder from "./Components/Genarel/Dashboard/MyOrder";
 import MakeAdmin from "./Components/Genarel/Dashboard/Admin/MakeAdmin";
 import UpdateProfile from "./Components/Genarel/Dashboard/UpdateProfile";
+import RequireAdmin from "./Components/Authentication/RequareAdmin";
 
 function App() {
   return (
@@ -28,7 +29,10 @@ function App() {
         <Route path="/alltools" element={<AllTools></AllTools>}></Route>
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="/reviews" element={<AllReview></AllReview>}></Route>
-        <Route path="/forgotpassword" element={<ForgotPass></ForgotPass>}></Route>
+        <Route
+          path="/forgotpassword"
+          element={<ForgotPass></ForgotPass>}
+        ></Route>
         <Route path="/signup" element={<Signup></Signup>}></Route>
         <Route
           path="/checkout/:id"
@@ -47,10 +51,20 @@ function App() {
           }
         >
           <Route index element={<MyProfile></MyProfile>}></Route>
-          <Route path="makeadmin" element={<MakeAdmin></MakeAdmin>}></Route>
-          <Route path="updateprofile" element={<UpdateProfile></UpdateProfile>}></Route>
+          <Route
+            path="updateprofile"
+            element={<UpdateProfile></UpdateProfile>}
+          ></Route>
           <Route path="postreview" element={<PostReview></PostReview>}></Route>
           <Route path="myorder" element={<MyOrder></MyOrder>}></Route>
+          <Route
+            path="makeadmin"
+            element={
+              <RequireAdmin>
+                <MakeAdmin></MakeAdmin>
+              </RequireAdmin>
+            }
+          ></Route>
         </Route>
       </Routes>
       <Footer></Footer>

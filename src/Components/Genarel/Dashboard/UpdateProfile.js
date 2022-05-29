@@ -14,7 +14,7 @@ const UpdateProfile = () => {
             address: e.target.address.value,
             phone: e.target.phone.value,
             facebook: e.target.facebook.value,
-            img: e.target.img.value
+            education: e.target.education.value
         }
         console.log(details);
             console.log(email);
@@ -25,7 +25,7 @@ const UpdateProfile = () => {
             });
     }
   return (
-    <div className="md:w-[600px] shadow-md rounded-lg bg-base-200 my-10 mx-auto">
+    <div className="md:w-[600px] shadow-md min-h-screen rounded-lg bg-base-200 my-10 mx-auto">
         <h1 className="text-4xl font-bold  uppercase text-center  mt-5">update profile</h1>
       <div class="card-body">
         <h2 class="card-title">Name: {user.displayName}</h2>
@@ -58,8 +58,8 @@ const UpdateProfile = () => {
         <input
           required
           type="text"
-          name="img"
-          placeholder="Rating out of 5"
+          name="education"
+          placeholder="Education"
           className="input input-bordered input-accent w-full "
         />
         <input
