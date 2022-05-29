@@ -10,14 +10,15 @@ const UpdateProfile = () => {
         e.preventDefault()
         const email = user.email;
 
-        const ditails = {
+        const details = {
             address: e.target.address.value,
             phone: e.target.phone.value,
             facebook: e.target.facebook.value,
             img: e.target.img.value
         }
+        console.log(details);
             console.log(email);
-          axios.put(`http://localhost:5000/users/details/${email}`, ditails )
+          axios.put(`http://localhost:5000/users/update/${email}`, details )
             .then((response) => {
               console.log(response);
               const { data } = response;
@@ -57,11 +58,8 @@ const UpdateProfile = () => {
         <input
           required
           type="text"
-          name="Img url"
-
+          name="img"
           placeholder="Rating out of 5"
-          max='5'
-          min='0'
           className="input input-bordered input-accent w-full "
         />
         <input

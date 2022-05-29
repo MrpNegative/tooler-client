@@ -27,7 +27,11 @@ const MakeAdmin = () => {
   // make admin
   const makeAdmin = (cEmail) => {
       console.log(cEmail);
-    axios.put(`http://localhost:5000/users/role/${cEmail}`)
+    axios.put(`http://localhost:5000/users/role/${cEmail}`,{
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
       .then((response) => {
         console.log(response);
         const { data } = response;

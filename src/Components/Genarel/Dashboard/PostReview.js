@@ -62,7 +62,6 @@ const PostReview = () => {
           required
           type="text"
           placeholder="Your Review"
-          min='100'
           name="review"
           className="input input-bordered input-accent h-24 w-full "
         />
