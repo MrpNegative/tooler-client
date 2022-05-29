@@ -3,13 +3,14 @@ import { signOut } from "firebase/auth";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useQuery } from "react-query";
+import { Link } from "react-router-dom";
 import { auth } from "../../Authentication/firebase.init";
 import Loading from "../Shared/Loading";
 
 const MyOrder = () => {
   const [user] = useAuthState(auth);
   const email = user?.email;
-  const { data, isLoading, refetch } = useQuery("myorder", () =>
+  const { data, isLoading, refetch } = useQuery(["myorder", email], () =>
     fetch(`http://localhost:5000/order/query?email=${email}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -22,7 +23,7 @@ const MyOrder = () => {
   }
   if(data?.scam){
     signOut(auth);
-    // return  window.location.reload();
+    return  window.location.reload();
   }
 
   // delete user 
@@ -39,7 +40,6 @@ const MyOrder = () => {
       const { data } = response;
       refetch()
     });
-
 
   }
   return (
@@ -76,7 +76,7 @@ const MyOrder = () => {
                   {order.paid ? (
                     "TransactionId"
                   ) : (
-                    <button className="btn btn-xs">Pay Now</button>
+                    <Link to={`/payment/${order._id}`}><button className="btn btn-xs">Pay Now</button></Link>
                   )}
                 </td>
                 <td>

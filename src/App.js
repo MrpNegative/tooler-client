@@ -19,6 +19,7 @@ import MakeAdmin from "./Components/Genarel/Dashboard/Admin/MakeAdmin";
 import UpdateProfile from "./Components/Genarel/Dashboard/UpdateProfile";
 import RequireAdmin from "./Components/Authentication/RequareAdmin";
 import PageNotFound from "./Components/Genarel/Shared/PageNotFound";
+import Payment from "./Components/Genarel/Others/Payment";
 
 function App() {
   return (
@@ -41,6 +42,14 @@ function App() {
           element={
             <RequireAuth>
               <Chackout></Chackout>
+            </RequireAuth>
+          }
+        ></Route>
+        <Route
+          path="/payment/:id"
+          element={
+            <RequireAuth>
+              <Payment></Payment>
             </RequireAuth>
           }
         ></Route>
