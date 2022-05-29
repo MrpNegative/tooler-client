@@ -34,6 +34,15 @@ const MakeAdmin = () => {
       });
   };
 
+  const deleteUser = dEmail =>{
+      console.log(dEmail);
+    axios.delete(`http://localhost:5000/users/delete/${dEmail}`)
+    .then((response) => {
+      console.log(response);
+      const { data } = response;
+    });
+  }
+
   return (
     <div>
       <div>
@@ -53,7 +62,7 @@ const MakeAdmin = () => {
             <tbody>
               {data?.map((user) => (
                 <tr key={user._id}>
-                  <th>1</th>
+                  <th>[user.index]</th>
                   <td>{user.email}</td>
                   <td>
                     {
@@ -65,6 +74,7 @@ const MakeAdmin = () => {
                       </button>
                     }
                   </td>
+                  <td><button onClick={()=>{deleteUser(user.email)}} className="btn btn-sm">Delete</button></td>
                 </tr>
               ))}
             </tbody>

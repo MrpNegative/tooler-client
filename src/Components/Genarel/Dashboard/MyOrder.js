@@ -64,7 +64,7 @@ const MyOrder = () => {
                   {order.paid ? (
                     "Can not delete"
                   ) : (
-                    <button className="btn btn-xs">Delete</button>
+                    <button onClick={()=>{deletOrder(order._id)}} className="btn btn-xs">Delete</button>
                   )}
                 </td>
               </tr>

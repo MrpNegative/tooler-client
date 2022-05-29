@@ -32,10 +32,10 @@ const Dashboard = () => {
     <label htmlFor="my-drawer-3" className="drawer-overlay"></label> 
     <ul className="menu p-4 overflow-y-auto w-80 bg-base-100">
 
-      <li><Link to="/dashboard">Profile</Link></li>
-      <li><Link to="/postreview">Post Review</Link></li>
-      <li><Link to="/dashboard/myorder">My order</Link></li>
+    <li><Link to="/dashboard">Profile</Link></li>
+      <li><Link to="/dashboard/postreview">Post Review</Link></li>
       <li><Link to="/dashboard/makeadmin">Make Admin</Link></li>
+      <li><Link to="/dashboard/myorder">My order</Link></li>
 
 
       

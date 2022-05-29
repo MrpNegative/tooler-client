@@ -1,62 +1,47 @@
+import { async } from "@firebase/util";
 import React, { useEffect, useState } from "react";
+import { useSendPasswordResetEmail } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 import Loading from "../Genarel/Shared/Loading";
-import {
-  useAuthState,
-  useSignInWithEmailAndPassword,
-  useSignInWithGoogle,
-} from "react-firebase-hooks/auth";
 import { auth } from "./firebase.init";
-import useToken from "../Hooks/useToken";
 
-const Login = () => {
+const ForgotPass = () => {
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const [user] = useAuthState(auth);
-  const navigate = useNavigate();
-  const location = useLocation();
 
   const [mainErrors, setMainErrors] = useState("");
 
-  const [signInWithEmailAndPassword, EPUser, loading, EPError] =
-    useSignInWithEmailAndPassword(auth);
-
-  const [signInWithGoogle, Euser, Eloading, Eerror] = useSignInWithGoogle(auth);
+  const [sendPasswordResetEmail, sending, Ferror] =
+    useSendPasswordResetEmail(auth);
 
   // token
-  const [token] = useToken(user);
-
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     setMainErrors("");
-    signInWithEmailAndPassword(data.email, data.pass);
+    await sendPasswordResetEmail(data.email);
+    toast.success('Password Reset link sent to your gmail if not please follow the error or check your spam folder')
   };
-  //page navigation
-  const from = location.state?.from?.pathname || "/";
-  useEffect(() => {
-    if (token) {
-      navigate(from);
-    }
-  }, [token]);
+
   //   errors
   useEffect(() => {
-    const error = EPError || Eerror;
+    const error = Ferror;
     if (error) {
       setMainErrors(error?.message.split("/")[1].split(")")[0]);
     }
-  }, [EPError, Eerror]);
+  }, [Ferror]);
   //loading
-  if (loading || Eloading) {
+  if (sending) {
     return <Loading></Loading>;
   }
   return (
     <div className="lg:h-screen my-10">
       <div className="card  md:w-96 w-72 mx-auto bg-base-100 shadow-xl">
         <div className="card-body">
-          <h2 className="text-3xl mb-5 font-bold uppercase">LogIn</h2>
+          <h2 className="text-3xl mb-5 font-bold uppercase">forgot password</h2>
           <div>
             <form
               className=" grid grid-rows-1 gap-3"
@@ -90,37 +75,10 @@ const Login = () => {
                   )}
                 </label>
               </div>
-              <div>
-                <input
-                  placeholder="Password"
-                  className="input input-bordered input-secondary w-full max-w-xs"
-                  {...register("pass", {
-                    required: {
-                      value: true,
-                      message: "Password is Required",
-                    },
-                    pattern: {
-                      value: /^(?=.*\d).{8,}$/,
-                      message: "Provide a valid Password",
-                    },
-                  })}
-                />
-                <label className="label">
-                  {errors.pass?.type === "required" && (
-                    <span className="label-text-alt text-red-600">
-                      {errors.pass.message}
-                    </span>
-                  )}
-                  {errors.pass?.type === "pattern" && (
-                    <span className="label-text-alt text-red-600">
-                      {errors.pass.message}
-                    </span>
-                  )}
-                </label>
-              </div>
+             
               <p className="text-left">
-                <Link className="link-hover" to="/forgotpassword">
-                  Forgot Password?
+                <Link className="link-hover" to="/login">
+                  Goto LogIn Page
                 </Link>
               </p>
               {mainErrors ? (
@@ -137,20 +95,11 @@ const Login = () => {
                 <span className="text-red-600 ml-2">Register</span>
               </Link>
             </p>
-            <div className="divider">OR</div>
-            <button
-              onClick={() => {
-                signInWithGoogle();
-              }}
-              className="border-0 w-full btn bg-blue-700 text-white"
-            >
-              Continue With Google
-            </button>
-          </div>
+           </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default ForgotPass;
