@@ -18,6 +18,7 @@ import MyOrder from "./Components/Genarel/Dashboard/MyOrder";
 import MakeAdmin from "./Components/Genarel/Dashboard/Admin/MakeAdmin";
 import UpdateProfile from "./Components/Genarel/Dashboard/UpdateProfile";
 import RequireAdmin from "./Components/Authentication/RequareAdmin";
+import PageNotFound from "./Components/Genarel/Shared/PageNotFound";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
       <Toaster position="top-right" reverseOrder={false} />
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
+        <Route path="*" element={<PageNotFound></PageNotFound>}></Route>
         <Route path="/alltools" element={<AllTools></AllTools>}></Route>
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="/reviews" element={<AllReview></AllReview>}></Route>
