@@ -20,6 +20,8 @@ import UpdateProfile from "./Components/Genarel/Dashboard/UpdateProfile";
 import RequireAdmin from "./Components/Authentication/RequareAdmin";
 import PageNotFound from "./Components/Genarel/Shared/PageNotFound";
 import Payment from "./Components/Genarel/Others/Payment";
+import MyProtfolio from "./Components/Genarel/MyProtfolio";
+import Blog from "./Components/Genarel/Blog";
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
         <Route path="/alltools" element={<AllTools></AllTools>}></Route>
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="/reviews" element={<AllReview></AllReview>}></Route>
+        <Route path="/protfolio" element={<MyProtfolio></MyProtfolio>}></Route>
+        <Route path="/blog" element={<Blog></Blog>}></Route>
         <Route
           path="/forgotpassword"
           element={<ForgotPass></ForgotPass>}

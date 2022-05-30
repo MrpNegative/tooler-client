@@ -27,9 +27,9 @@ const MyProfile = () => {
     return  window.location.reload();
   }
     return (
-        <div className='md:w-[600px] my-10 mx-auto'>
-            <div class="card card-side bg-base-100 shadow-xl">
-            <div className=' max-h-96 lg:w-56'>
+        <div className='md:w-[600px] w-full my-10 mx-auto'>
+            <div class="card md:flex-row flex-col card-side bg-base-100 shadow-xl">
+            <div className=' max-h-96 my-5 lg:w-56'>
             <img className='rounded-lg mx-auto my-10' src={user.photoURL} alt="Movie"/>
             <Link to='/dashboard/updateprofile'> <h1 className='text-center bg-base-300 p-4 rounded-2xl w-36 mx-auto font-bold uppercase'>edit profile</h1></Link>
             </div>

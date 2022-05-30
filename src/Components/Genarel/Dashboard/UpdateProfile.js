@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { auth } from "../../Authentication/firebase.init";
 
@@ -22,6 +23,11 @@ const UpdateProfile = () => {
             .then((response) => {
               console.log(response);
               const { data } = response;
+              if(data.acknowledged){
+                toast.success('Update Successful')
+                e.target.reset()
+                window.history.back()
+              }
             });
     }
   return (

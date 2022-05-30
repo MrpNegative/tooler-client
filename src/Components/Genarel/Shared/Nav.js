@@ -27,12 +27,12 @@ const Nav = () => {
         ""
       )}
       <li>
-        <Link to="/" className="whitespace-nowrap">
+        <Link to="/protfolio" className="whitespace-nowrap">
           My Portfolio
         </Link>
       </li>
       <li>
-        <Link to="/">Blog</Link>
+        <Link to="/blog">Blog</Link>
       </li>
       {user ? (
         <button
