@@ -80,6 +80,30 @@ function App() {
               </RequireAdmin>
             }
           ></Route>
+          <Route
+            path="manageallorder"
+            element={
+              <RequireAdmin>
+                <MakeAdmin></MakeAdmin>
+              </RequireAdmin>
+            }
+          ></Route>
+          <Route
+            path="manageproduct"
+            element={
+              <RequireAdmin>
+                <MakeAdmin></MakeAdmin>
+              </RequireAdmin>
+            }
+          ></Route>
+          <Route
+            path="addapoduct"
+            element={
+              <RequireAdmin>
+                <MakeAdmin></MakeAdmin>
+              </RequireAdmin>
+            }
+          ></Route>
         </Route>
       </Routes>
       <Footer></Footer>

@@ -11,9 +11,7 @@ const Blog = () => {
             How will you improve the performance of a React Application
           </h1>
           <p>
-            Optimizing application performance is key for developers who are
-            mindful of keeping a users experience positive to keep them on an
-            app and engaged
+          When a user enters the website, he only sees the things on the home page, he doesn't need anything else. But if we load all the code then it takes a lot of time . So the solution is to load the code according to the user's demand or to get good performeance. When a user enter the webside the home page will load first then if the user change route the data will load.
           </p>
         </article>
         <hr />
@@ -24,9 +22,7 @@ const Blog = () => {
             application?
           </h1>
           <p>
-            Optimizing application performance is key for developers who are
-            mindful of keeping a user’s experience positive to keep them on an
-            app and engaged
+          At one time states were lined up globally for state management but React 16 came up with a thing called context api, through which states can be shared between any child component except a global state. Without drilling any kind of props. It has made state management much easier.
           </p>
         </article>
         <hr />
@@ -35,20 +31,16 @@ const Blog = () => {
             How does prototypical inheritance work?
           </h1>
           <p className="mt-3">
-          The Prototypal Inheritance is a feature in javascript witch used to add methods and properties in objects. It is a method by which an object can inherit the properties and methods of another object. Traditionally, in order to get and set the [[Prototype]] of an object, we use Object. getPrototypeOf and Object.
+          Prototype is a very important topic of java script. Because java script runs through many hidden features. For example, the name of a function is name and there is an object inside that function. Now if I give name.toString () then who does the work of this toString. This is what prototype inheritance does. But prototype inheritance is, suppose there are 2 functions, they have 2 types of values, now I want to make 2 connections. To do this, they need to be connected through a call method and put into a prototype. ex: man.prototype. Then you have to do it this way to create a new object. new.prototype = Object.create (Man.prototype)
           </p>
         </article>
         <hr />
         <article className="my-10">
           <h1 className="text-2xl  font-bold">
-            You have an array of products. Each product has a name, price,
-            description, etc. How will you implement a search to find products
-            by name?
+          Why you do not set the state directly in React.
           </h1>
           <p>
-            Optimizing application performance is key for developers who are
-            mindful of keeping a user’s experience positive to keep them on an
-            app and engaged
+          If we set the state directly then we have no control over that state. And if you use it elsewhere, the same data will remain which is not correct. So we can put data in setState without directly replacing the state. Then I can use it in different places and if necessary I can also set new data.
           </p>
         </article>
         <hr />
@@ -58,9 +50,7 @@ const Blog = () => {
             What is a unit test? Why should write unit tests?
           </h1>
           <p>
-            Optimizing application performance is key for developers who are
-            mindful of keeping a user's experience positive to keep them on an
-            app and engaged
+          Unit testing means Defects are captured in very early phase Build gives the quality of the build as well Build Means whatever version is comming for tedting, a part of application. Where the code is reusable, it should be tested more so that it can be reused by making slight changes if needed in any project ahead.
           </p>
         </article>
       </div>
