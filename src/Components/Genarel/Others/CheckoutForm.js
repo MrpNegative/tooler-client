@@ -1,5 +1,7 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 const CheckoutForm = ({ orderData, totalPrice }) => {
   const stripe = useStripe();
@@ -10,7 +12,7 @@ const CheckoutForm = ({ orderData, totalPrice }) => {
 
   console.log(totalPrice);
   const price = totalPrice;
-  const {toolName, email } = orderData
+  const {toolName, email, _id } = orderData
   useEffect(() => { 
     if (price) {
       fetch("https://frozen-mesa-63268.herokuapp.com/create-payment-intent", {
@@ -68,7 +70,26 @@ const CheckoutForm = ({ orderData, totalPrice }) => {
     else{
       setCardError('')
       setDone("Your payment is completed")
-      console.log(paymentIntent);
+      console.log(paymentIntent.id);
+      const transationId = paymentIntent.id
+
+      axios.put(`https://frozen-mesa-63268.herokuapp.com/order/paid/${_id}`, {transationId},{
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((response) => {
+        console.log(response);
+        const { data } = response;
+        if(data.acknowledged){
+          toast.success('Payment done')
+
+        }
+        else{
+          toast('somthing Went wrong try again')
+        }
+      });
+
     }
   };
   return (
@@ -93,7 +114,7 @@ const CheckoutForm = ({ orderData, totalPrice }) => {
         <button
           className="btn btn-sm mt-5"
           type="submit"
-          disabled={!stripe || !clientSecret}
+          disabled={!stripe || !clientSecret || done}
         >
           Pay
         </button>

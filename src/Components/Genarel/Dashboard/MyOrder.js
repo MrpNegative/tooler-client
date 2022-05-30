@@ -30,7 +30,9 @@ const MyOrder = () => {
   const deleteOrder = id =>{
 
     console.log(id);
-    axios.delete(`https://frozen-mesa-63268.herokuapp.com/order/${id}`,{
+    const procide = window.confirm('are You Sure')
+    if(procide){
+      axios.delete(`https://frozen-mesa-63268.herokuapp.com/order/${id}`,{
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -40,6 +42,7 @@ const MyOrder = () => {
       const { data } = response;
       refetch()
     });
+    }
 
   }
   return (
@@ -74,7 +77,7 @@ const MyOrder = () => {
                 <td>{order.status ? "Shipped" : "Pending"}</td>
                 <td>
                   {order.paid ? (
-                    "TransactionId"
+                    <>{order.paid}</>
                   ) : (
                     <Link to={`/payment/${order._id}`}><button className="btn btn-xs">Pay Now</button></Link>
                   )}

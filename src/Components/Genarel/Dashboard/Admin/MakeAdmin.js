@@ -2,6 +2,7 @@ import axios from "axios";
 import { signOut } from "firebase/auth";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import toast from "react-hot-toast";
 import { useQuery } from "react-query";
 import { auth } from "../../../Authentication/firebase.init";
 import Loading from "../../Shared/Loading";
@@ -27,7 +28,9 @@ const MakeAdmin = () => {
   // make admin
   const makeAdmin = (cEmail) => {
       console.log(cEmail);
-    axios.put(`https://frozen-mesa-63268.herokuapp.com/users/role/${cEmail}`,{
+      const proced = window.confirm('are your shure')
+    if(proced){
+      axios.put(`https://frozen-mesa-63268.herokuapp.com/users/role/${cEmail}`,{
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -35,16 +38,34 @@ const MakeAdmin = () => {
       .then((response) => {
         console.log(response);
         const { data } = response;
+        if(data.acknowledged){
+          toast.success('Sucessfully Admin Cresated')
+          refetch()
+        }
+        else{
+          toast('somthing Went wrong try again')
+        }
       });
+    }
   };
 
   const deleteUser = dEmail =>{
       console.log(dEmail);
-    axios.delete(`https://frozen-mesa-63268.herokuapp.com/users/delete/${dEmail}`)
+    const proced = window.confirm()
+    if(proced){
+      axios.delete(`https://frozen-mesa-63268.herokuapp.com/users/delete/${dEmail}`)
     .then((response) => {
       console.log(response);
       const { data } = response;
+      if(data.acknowledged){
+        toast.success('user Deleted')
+        refetch()
+      }
+      else{
+        toast('somthing Went wrong try again')
+      }
     });
+    }
   }
 
   return (

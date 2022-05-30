@@ -24,9 +24,16 @@ const Dashboard = () => {
         <ul className="menu menu-horizontal">
          
         <li><Link to="/dashboard">Profile</Link></li>
-      <li><Link to="/dashboard/postreview">Post Review</Link></li>
+      {!admin && <>
+        <li><Link to="/dashboard/postreview">Post Review</Link></li>
       <li><Link to="/dashboard/myorder">My order</Link></li>
-      {admin && <li><Link to="/dashboard/makeadmin">Make Admin</Link></li>}
+      </>}
+      {admin && <>
+        <li><Link to="/dashboard/makeadmin">Make Admin</Link></li>
+        <li><Link to="/dashboard/manageallorder">Manage All Orders</Link></li>
+        <li><Link to="/dashboard/manageproduct">Manage Product</Link></li>
+        <li><Link to="/dashboard/addapoduct">Add Product</Link></li>
+      </>}
         </ul>
       </div>
     </div>
@@ -38,9 +45,16 @@ const Dashboard = () => {
     <ul className="menu p-4 overflow-y-auto w-80 bg-base-100">
 
     <li><Link to="/dashboard">Profile</Link></li>
-      <li><Link to="/dashboard/postreview">Post Review</Link></li>
+    {!admin && <>
+        <li><Link to="/dashboard/postreview">Post Review</Link></li>
       <li><Link to="/dashboard/myorder">My order</Link></li>
-      {admin && <li><Link to="/dashboard/makeadmin">Make Admin</Link></li>}
+      </>}
+      {admin && <>
+        <li><Link to="/dashboard/makeadmin">Make Admin</Link></li>
+        <li><Link to="/dashboard/manageallorder">Manage All Orders</Link></li>
+        <li><Link to="/dashboard/manageproduct">Manage Product</Link></li>
+        <li><Link to="/dashboard/addapoduct">Add Product</Link></li>
+      </>}
 
 
       
