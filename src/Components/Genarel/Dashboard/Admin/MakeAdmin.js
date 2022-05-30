@@ -10,7 +10,7 @@ const MakeAdmin = () => {
   const [user] = useAuthState(auth);
   const email = user?.email;
   const { data, isLoading, refetch } = useQuery("makeAdmin", () =>
-    fetch(`http://localhost:5000/users`, {
+    fetch(`https://frozen-mesa-63268.herokuapp.com/users`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -27,7 +27,7 @@ const MakeAdmin = () => {
   // make admin
   const makeAdmin = (cEmail) => {
       console.log(cEmail);
-    axios.put(`http://localhost:5000/users/role/${cEmail}`,{
+    axios.put(`https://frozen-mesa-63268.herokuapp.com/users/role/${cEmail}`,{
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -40,7 +40,7 @@ const MakeAdmin = () => {
 
   const deleteUser = dEmail =>{
       console.log(dEmail);
-    axios.delete(`http://localhost:5000/users/delete/${dEmail}`)
+    axios.delete(`https://frozen-mesa-63268.herokuapp.com/users/delete/${dEmail}`)
     .then((response) => {
       console.log(response);
       const { data } = response;

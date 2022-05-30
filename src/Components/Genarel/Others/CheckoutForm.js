@@ -13,7 +13,7 @@ const CheckoutForm = ({ orderData, totalPrice }) => {
   const {toolName, email } = orderData
   useEffect(() => { 
     if (price) {
-      fetch("http://localhost:5000/create-payment-intent", {
+      fetch("https://frozen-mesa-63268.herokuapp.com/create-payment-intent", {
         method: "POST",
         headers: {
           "content-type": "application/json",

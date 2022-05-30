@@ -4,7 +4,7 @@ import ToolsCard from './Home/ToolsCard';
 import Loading from './Shared/Loading';
 const AllTools = () => {
     const { data, isLoading, refetch } = useQuery("allTools", () =>
-    fetch(`http://localhost:5000/tools`).then(
+    fetch(`https://frozen-mesa-63268.herokuapp.com/tools`).then(
       (res) => res.json()
     )
   );

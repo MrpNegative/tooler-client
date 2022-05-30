@@ -4,13 +4,15 @@ const Blog = () => {
   return (
     <div>
       <div className="mx-auto p-5 my-5 rounded-xl bg-base-200 lg:w-[700px] md:w-[500px] w-full">
-        <article className="my-10">
+          <h1 className="text-3xl font-bold uppercase text-center ">blog</h1>
+          <hr />
+        <article className="mb-10 mt-3">
           <h1 className="text-2xl  font-bold">
             How will you improve the performance of a React Application
           </h1>
           <p>
             Optimizing application performance is key for developers who are
-            mindful of keeping a user’s experience positive to keep them on an
+            mindful of keeping a users experience positive to keep them on an
             app and engaged
           </p>
         </article>

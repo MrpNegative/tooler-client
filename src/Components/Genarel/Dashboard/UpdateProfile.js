@@ -19,7 +19,7 @@ const UpdateProfile = () => {
         }
         console.log(details);
             console.log(email);
-          axios.put(`http://localhost:5000/users/update/${email}`, details )
+          axios.put(`https://frozen-mesa-63268.herokuapp.com/users/update/${email}`, details )
             .then((response) => {
               console.log(response);
               const { data } = response;
@@ -70,7 +70,7 @@ const UpdateProfile = () => {
         />
         <input
           type="submit"
-          value="Post review"
+          value="Update Profile"
           className="btn"
         />
       </form>

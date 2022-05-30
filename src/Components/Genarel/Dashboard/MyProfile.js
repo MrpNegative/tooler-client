@@ -11,7 +11,7 @@ const MyProfile = () => {
     
     const email = user.email
     const { data, isLoading, } = useQuery("myorder", () =>
-    fetch(`http://localhost:5000/users/${email}`, {
+    fetch(`https://frozen-mesa-63268.herokuapp.com/users/${email}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },

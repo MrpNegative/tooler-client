@@ -4,7 +4,7 @@ const ReviewCard = ({ oneReview }) => {
   const { name, review, rating } = oneReview;
   return (
     <div>
-      <div className="card w-96 bg-base-100 shadow-xl">
+      <div className="card max-w-96 bg-base-100 shadow-xl">
         <div className="card-body">
           <h2 className="card-title">Client Name: {name}</h2>
           <div>

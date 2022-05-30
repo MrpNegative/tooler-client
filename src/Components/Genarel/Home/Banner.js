@@ -12,7 +12,7 @@ const Banner = () => {
           />
           </div>
           <div className="flex-1">
-            <h1 className="text-5xl font-bold"><span className="text-red-600">Tooler </span> Assignment is not finish yet</h1>
+            <h1 className="text-5xl font-bold uppercase"><span className="text-red-600 uppercase">Tooler </span>Get the best Hand tools in affortable price</h1>
             <button className="btn my-5 btn-primary"><Link to='/alltools'>All Tools</Link></button>
           </div>
         </div>
