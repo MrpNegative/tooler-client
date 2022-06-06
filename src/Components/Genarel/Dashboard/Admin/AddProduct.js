@@ -3,91 +3,101 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast";
 import { auth } from "../../../Authentication/firebase.init";
 
-
 const AddProduct = () => {
-    
-    const PostReview = () => {
-        const [user] = useAuthState(auth)
-        const handelReview = e =>{
-            e.preventDefault();
-    
-        const review = {
-          name: user?.displayName,
-          email: user?.email,
-          rating: e.target.rating.value,
-          review: e.target.review.value,
-        };
-        console.log(review);
-    
-        fetch("http://localhost:5000/review", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(review),
-        })
-          .then((response) => response.json())
-          .then((data) => {console.log(data);
-        if(data?.acknowledged){
-            toast.success('your review added')
-            e.target.reset()
-        }
-        else{
-            toast.error('something went wrong. Please try again letter')
-        }
+  const [user] = useAuthState(auth);
+
+  const addProduct = (e) => {
+    e.preventDefault();
+
+    const product = {
+      name: e.target.name.value,
+      price: e.target.price.value,
+      description: e.target.description.value,
+      minimum: e.target.minimum.value,
+      available: e.target.available.value,
+      img: e.target.img.value,
+    };
+    console.log(product);
+
+    fetch("http://localhost:5000/tools", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+      body: JSON.stringify(product),
     })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (data?.acknowledged) {
+          toast.success("your review added");
+          e.target.reset();
+        } else {
+          toast.error("something went wrong. Please try again letter");
         }
-    return (
-       
+      });
+  };
+
+  // name, price, description, minimum, available, img
+  return (
     <div>
-        <h1 className="text-4xl text-center font-bold uppercase my-10">Post A Review</h1>
+      <h1 className="text-4xl text-center font-bold uppercase my-10">
+        Post A Review
+      </h1>
       <form
-        // onChange={handaleDisable}
-        onSubmit={handelReview}
+        onSubmit={addProduct}
         className="grid md:w-[500px] w-72 mx-auto my-3 gap-4"
       >
         <input
           required
           type="text"
-          placeholder="Your Name"
-          value={`${user?.displayName}`}
-          disabled
-          className="input input-bordered input-accent w-full "
-        />
-        <input
-          required
-          type="email"
-          placeholder="Email"
-          value={`${user?.email}`}
-          disabled
+          placeholder="Name"
+          name="name"
           className="input input-bordered input-accent w-full "
         />
         <textarea
           required
           type="text"
-          placeholder="Your Review"
-          name="review"
-          className="input input-bordered input-accent h-24 w-full "
+          name="description"
+          placeholder="Description"
+          className="input input-bordered input-accent h-24 "
         />
         <input
           required
           type="number"
-          name="rating"
-
-          placeholder="Rating out of 5"
-          max='5'
-          min='0'
+          placeholder="Price"
+          name="price"
           className="input input-bordered input-accent w-full "
         />
         <input
-          type="submit"
-          value="Post review"
-          className="btn"
+          required
+          type="number"
+          min="0"
+          placeholder="Minimum Quantity"
+          name="minimum"
+          className="input input-bordered input-accent w-full "
         />
+        <input
+          required
+          type="number"
+          min="0"
+          placeholder="Available"
+          name="available"
+          className="input input-bordered input-accent w-full "
+        />
+        <input
+          required
+          type="text"
+          placeholder="Img URL"
+          name="img"
+          className="input input-bordered input-accent w-full "
+        />
+
+        <input type="submit" value="Post review" className="btn" />
       </form>
     </div>
   );
 };
 
-}
 export default AddProduct;
