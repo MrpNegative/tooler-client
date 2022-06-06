@@ -2,6 +2,7 @@ import axios from 'axios';
 import { signOut } from 'firebase/auth';
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import toast from 'react-hot-toast';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 import { auth } from '../../../Authentication/firebase.init';
@@ -50,16 +51,25 @@ const ManageAllOrder = () => {
     console.log(id);
     const procide = window.confirm('are You Sure')
     if(procide){
-      axios.put(`http://localhost:5000/order/shiped/${id}`,{
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
-    .then((response) => {
-      console.log(response);
-      const { data } = response;
-      refetch()
-    });
+
+        fetch(`http://localhost:5000/order/shiped/${id}`, {
+          method: 'PUT',
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        
+        })
+              .then(res=>res.json())
+              .then(data => {
+                if(data.acknowledged){
+                  toast.success('Successfully Admin Created')
+                  refetch()
+                }
+                else{
+                  toast('Something Went wrong try again')
+                }
+        
+              });
     }
 
   }
@@ -76,15 +86,15 @@ const ManageAllOrder = () => {
               <th>Product</th>
               <th>Quantity</th>
               <th>Total Price</th>
-              <th>Status</th>
+              <th>User</th>
               <th>Ship product</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            {data?.map((order) => (
+            {data?.map((order, i) => (
               <tr key={order._id}>
-                <th>1</th>
+                <th>{i+ 1}</th>
                 <td>{order.toolName}</td>
                 <td>{order.quantity} </td>
                 <td>
@@ -92,16 +102,10 @@ const ManageAllOrder = () => {
                     2
                   )}
                 </td>
-                <td>{order.status ? "Shipped" : "Pending"}</td>
+                <td>{order.email}</td>
                 <td>
-                  {order.paid ? (
-                      (
-                        <button onClick={()=>{ShipOrder(order._id)}} className="btn btn-xs">Ship Now</button>
-                      )
-                    
-                  ) : (
-                    <>Not payed</>
-                  )}
+                  {order.status ? 'Shiped' : order.paid ? <button onClick={()=>{ShipOrder(order._id)}} className="btn btn-xs">Ship Now</button> : 'Not Paid' }
+                  
                 </td>
                 <td>
                   {order.paid ? (

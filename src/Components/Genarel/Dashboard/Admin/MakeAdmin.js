@@ -105,7 +105,7 @@ const MakeAdmin = () => {
                       </button>
                     }
                   </td>
-                  <td><button onClick={()=>{deleteUser(user.email)}} className="btn btn-sm">Delete</button></td>
+                  <td>{email !== user.email && <button onClick={()=>{deleteUser(user.email)}} className="btn btn-sm">Delete</button>}</td>
                 </tr>
               ))}
             </tbody>
