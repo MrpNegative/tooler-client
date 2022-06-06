@@ -5,7 +5,7 @@ import ToolsCard from './ToolsCard';
 
 const OurTools = () => {
     const { data, isLoading, refetch } = useQuery("tools", () =>
-    fetch(`https://frozen-mesa-63268.herokuapp.com/tools`).then(
+    fetch(`http://localhost:5000/tools`).then(
       (res) => res.json()
     )
   );

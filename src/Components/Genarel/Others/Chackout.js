@@ -12,7 +12,7 @@ const Chackout = () => {
   const [disable, setDisable] = useState(false);
   const { id } = useParams();
   const { data, isLoading, refetch } = useQuery("order", () =>
-    fetch(`https://frozen-mesa-63268.herokuapp.com/tools/${id}`).then((res) => res.json())
+    fetch(`http://localhost:5000/tools/${id}`).then((res) => res.json())
   );
   if (isLoading || uloading) {
     return <Loading></Loading>;
@@ -46,7 +46,7 @@ const Chackout = () => {
       return;
     }
 
-    fetch("https://frozen-mesa-63268.herokuapp.com/order", {
+    fetch("http://localhost:5000/order", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -60,7 +60,7 @@ const Chackout = () => {
           const brandNewAv = { newAvailable };
           console.log(newAvailable);
           axios
-            .put(`https://frozen-mesa-63268.herokuapp.com/tools/${id}`, brandNewAv)
+            .put(`http://localhost:5000/tools/${id}`, brandNewAv)
             .then((response) => {
               console.log(response);
               const { data } = response;

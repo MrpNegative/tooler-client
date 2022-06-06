@@ -16,6 +16,9 @@ import Nav from "./Components/Genarel/Shared/Nav";
 import AllReview from "./Components/Genarel/AllReview";
 import MyOrder from "./Components/Genarel/Dashboard/MyOrder";
 import MakeAdmin from "./Components/Genarel/Dashboard/Admin/MakeAdmin";
+import AddProduct from "./Components/Genarel/Dashboard/Admin/AddProduct";
+import ManageAllOrder from "./Components/Genarel/Dashboard/Admin/ManageAllOrder";
+import ManageProduct from "./Components/Genarel/Dashboard/Admin/ManageProduct";
 import UpdateProfile from "./Components/Genarel/Dashboard/UpdateProfile";
 import RequireAdmin from "./Components/Authentication/RequareAdmin";
 import PageNotFound from "./Components/Genarel/Shared/PageNotFound";
@@ -84,7 +87,7 @@ function App() {
             path="manageallorder"
             element={
               <RequireAdmin>
-                <MakeAdmin></MakeAdmin>
+                <ManageAllOrder></ManageAllOrder>
               </RequireAdmin>
             }
           ></Route>
@@ -92,7 +95,7 @@ function App() {
             path="manageproduct"
             element={
               <RequireAdmin>
-                <MakeAdmin></MakeAdmin>
+                <ManageProduct></ManageProduct>
               </RequireAdmin>
             }
           ></Route>
@@ -100,7 +103,7 @@ function App() {
             path="addapoduct"
             element={
               <RequireAdmin>
-                <MakeAdmin></MakeAdmin>
+                <AddProduct></AddProduct>
               </RequireAdmin>
             }
           ></Route>

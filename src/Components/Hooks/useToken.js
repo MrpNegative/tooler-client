@@ -8,7 +8,7 @@ const useToken = (user) => {
     const theUser = { email: email };
     if (email) {
       axios
-        .put(`https://frozen-mesa-63268.herokuapp.com/users/${email}`, theUser)
+        .put(`http://localhost:5000/users/${email}`, theUser)
         .then((response) => {
           console.log(response);
           const { data } = response;

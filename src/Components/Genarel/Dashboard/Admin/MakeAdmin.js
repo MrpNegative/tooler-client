@@ -11,7 +11,7 @@ const MakeAdmin = () => {
   const [user] = useAuthState(auth);
   const email = user?.email;
   const { data, isLoading, refetch } = useQuery("makeAdmin", () =>
-    fetch(`https://frozen-mesa-63268.herokuapp.com/users`, {
+    fetch(`http://localhost:5000/users`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -28,23 +28,25 @@ const MakeAdmin = () => {
   // make admin
   const makeAdmin = (cEmail) => {
       console.log(cEmail);
-      const proced = window.confirm('are your shure')
+      const proced = window.confirm('are your sure')
     if(proced){
-      axios.put(`https://frozen-mesa-63268.herokuapp.com/users/role/${cEmail}`,{
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
-      .then((response) => {
-        console.log(response);
-        const { data } = response;
+    fetch(`http://localhost:5000/users/role/${cEmail}`, {
+  method: 'PUT',
+  headers: {
+    authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+  },
+
+})
+      .then(res=>res.json())
+      .then(data => {
         if(data.acknowledged){
-          toast.success('Sucessfully Admin Cresated')
+          toast.success('Successfully Admin Created')
           refetch()
         }
         else{
-          toast('somthing Went wrong try again')
+          toast('Something Went wrong try again')
         }
+
       });
     }
   };
@@ -53,7 +55,11 @@ const MakeAdmin = () => {
       console.log(dEmail);
     const proced = window.confirm()
     if(proced){
-      axios.delete(`https://frozen-mesa-63268.herokuapp.com/users/delete/${dEmail}`)
+      axios.delete(`http://localhost:5000/users/delete/${dEmail}`,{
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
     .then((response) => {
       console.log(response);
       const { data } = response;
@@ -85,9 +91,9 @@ const MakeAdmin = () => {
               </tr>
             </thead>
             <tbody>
-              {data?.map((user) => (
+              {data?.map((user, index) => (
                 <tr key={user._id}>
-                  <th>[user.index]</th>
+                  <th>{index + 1}</th>
                   <td>{user.email}</td>
                   <td>
                     {

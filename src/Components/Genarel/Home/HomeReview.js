@@ -6,7 +6,7 @@ import ReviewCard from '../Shared/ReviewCard';
 
 const OurTools = () => {
     const { data, isLoading, refetch } = useQuery("homeReview", () =>
-    fetch(`https://frozen-mesa-63268.herokuapp.com/review`).then(
+    fetch(`http://localhost:5000/review`).then(
       (res) => res.json()
     )
   );
