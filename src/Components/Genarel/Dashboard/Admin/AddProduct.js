@@ -19,7 +19,7 @@ const AddProduct = () => {
     };
     console.log(product);
 
-    fetch("http://localhost:5000/tools", {
+    fetch("https://frozen-mesa-63268.herokuapp.com/tools", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -68,6 +68,7 @@ const AddProduct = () => {
           type="number"
           placeholder="Price"
           name="price"
+          step="0.01"
           className="input input-bordered input-accent w-full "
         />
         <input

@@ -16,7 +16,7 @@ const PostReview = () => {
     };
     console.log(review);
 
-    fetch("http://localhost:5000/review", {
+    fetch("https://frozen-mesa-63268.herokuapp.com/review", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -15,7 +15,7 @@ const CheckoutForm = ({ orderData, totalPrice }) => {
   const {toolName, email, _id } = orderData
   useEffect(() => { 
     if (price) {
-      fetch("http://localhost:5000/create-payment-intent", {
+      fetch("https://frozen-mesa-63268.herokuapp.com/create-payment-intent", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -73,7 +73,7 @@ const CheckoutForm = ({ orderData, totalPrice }) => {
       console.log(paymentIntent.id);
       const transationId = paymentIntent.id
 
-      axios.put(`http://localhost:5000/order/paid/${_id}`, {transationId},{
+      axios.put(`https://frozen-mesa-63268.herokuapp.com/order/paid/${_id}`, {transationId},{
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },

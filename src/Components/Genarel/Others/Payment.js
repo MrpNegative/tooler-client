@@ -14,7 +14,7 @@ const Payment = () => {
   const { id } = useParams();
 
   const { data, isLoading, refetch } = useQuery(["payment", id], () =>
-    fetch(`http://localhost:5000/order/get/${id}`, {
+    fetch(`https://frozen-mesa-63268.herokuapp.com/order/get/${id}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },

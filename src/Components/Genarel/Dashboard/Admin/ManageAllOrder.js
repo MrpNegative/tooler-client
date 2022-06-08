@@ -12,7 +12,7 @@ const ManageAllOrder = () => {
     const [user] = useAuthState(auth);
   const email = user?.email;
   const { data, isLoading, refetch } = useQuery("allorder", () =>
-    fetch(`http://localhost:5000/order`, {
+    fetch(`https://frozen-mesa-63268.herokuapp.com/order`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -33,7 +33,7 @@ const ManageAllOrder = () => {
     console.log(id);
     const procide = window.confirm('are You Sure')
     if(procide){
-      axios.delete(`http://localhost:5000/order/${id}`,{
+      axios.delete(`https://frozen-mesa-63268.herokuapp.com/order/${id}`,{
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -52,7 +52,7 @@ const ManageAllOrder = () => {
     const procide = window.confirm('are You Sure')
     if(procide){
 
-        fetch(`http://localhost:5000/order/shiped/${id}`, {
+        fetch(`https://frozen-mesa-63268.herokuapp.com/order/shiped/${id}`, {
           method: 'PUT',
           headers: {
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,

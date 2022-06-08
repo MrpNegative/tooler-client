@@ -11,7 +11,7 @@ const MyOrder = () => {
   const [user] = useAuthState(auth);
   const email = user?.email;
   const { data, isLoading, refetch } = useQuery(["myorder", email], () =>
-    fetch(`http://localhost:5000/order/query?email=${email}`, {
+    fetch(`https://frozen-mesa-63268.herokuapp.com/order/query?email=${email}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -32,7 +32,7 @@ const MyOrder = () => {
     console.log(id);
     const procide = window.confirm('are You Sure')
     if(procide){
-      axios.delete(`http://localhost:5000/order/${id}`,{
+      axios.delete(`https://frozen-mesa-63268.herokuapp.com/order/${id}`,{
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
