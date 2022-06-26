@@ -8,7 +8,7 @@ import { auth } from "../../Authentication/firebase.init";
 import Loading from "../Shared/Loading";
 import CheckoutForm from "./CheckoutForm";
 const stripePromise = loadStripe(
-  "pk_test_51KxSshAhcvFtBaH3E0AMcK9eZZ7MXOb43TlBB6woqncNIxPQKH7PvfYdTBSRLD93J1Uu7yjDEbcjHUe5vSgX4x4E00qchzQQgb"
+  "pk_live_51LEvzeHjwpIzncm5hGuvylrJ3ngodPwpMlrGn8OpqgpnCelzCD7UTk9rwCu2uT0QAae5foqbu0g6Y4PYJCBVcZfJ000JGg1xNB"
 );
 const Payment = () => {
   const { id } = useParams();
