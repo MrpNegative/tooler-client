@@ -19,7 +19,7 @@ const UpdateProfile = () => {
         }
         console.log(details);
             console.log(email);
-          axios.put(`https://frozen-mesa-63268.herokuapp.com/users/update/${email}`, details )
+          axios.put(`https://assignment-12-server-ochre.vercel.app/users/update/${email}`, details )
             .then((response) => {
               console.log(response);
               const { data } = response;

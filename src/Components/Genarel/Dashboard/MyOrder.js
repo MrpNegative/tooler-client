@@ -11,7 +11,7 @@ const MyOrder = () => {
   const [user] = useAuthState(auth);
   const email = user?.email;
   const { data, isLoading, refetch } = useQuery(["myorder", email], () =>
-    fetch(`https://frozen-mesa-63268.herokuapp.com/order/query?email=${email}`, {
+    fetch(`https://assignment-12-server-ochre.vercel.app/order/query?email=${email}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -32,7 +32,7 @@ const MyOrder = () => {
     console.log(id);
     const procide = window.confirm('are You Sure')
     if(procide){
-      axios.delete(`https://frozen-mesa-63268.herokuapp.com/order/${id}`,{
+      axios.delete(`https://assignment-12-server-ochre.vercel.app/order/${id}`,{
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },

@@ -11,7 +11,7 @@ const MakeAdmin = () => {
   const [user] = useAuthState(auth);
   const email = user?.email;
   const { data, isLoading, refetch } = useQuery("makeAdmin", () =>
-    fetch(`https://frozen-mesa-63268.herokuapp.com/users`, {
+    fetch(`https://assignment-12-server-ochre.vercel.app/users`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -30,7 +30,7 @@ const MakeAdmin = () => {
       console.log(cEmail);
       const proced = window.confirm('are your sure')
     if(proced){
-    fetch(`https://frozen-mesa-63268.herokuapp.com/users/role/${cEmail}`, {
+    fetch(`https://assignment-12-server-ochre.vercel.app/users/role/${cEmail}`, {
   method: 'PUT',
   headers: {
     authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -55,7 +55,7 @@ const MakeAdmin = () => {
       console.log(dEmail);
     const proced = window.confirm()
     if(proced){
-      axios.delete(`https://frozen-mesa-63268.herokuapp.com/users/delete/${dEmail}`,{
+      axios.delete(`https://assignment-12-server-ochre.vercel.app/users/delete/${dEmail}`,{
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },

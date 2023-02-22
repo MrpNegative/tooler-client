@@ -12,7 +12,7 @@ const ManageAllOrder = () => {
   const [user] = useAuthState(auth);
   const email = user?.email;
   const { data, isLoading, refetch } = useQuery("allorder", () =>
-    fetch(`https://frozen-mesa-63268.herokuapp.com/order`, {
+    fetch(`https://assignment-12-server-ochre.vercel.app/order`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -32,7 +32,7 @@ const ManageAllOrder = () => {
     const procide = window.confirm("are You Sure");
     if (procide) {
       axios
-        .delete(`https://frozen-mesa-63268.herokuapp.com/order/${id}`, {
+        .delete(`https://assignment-12-server-ochre.vercel.app/order/${id}`, {
           headers: {
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           },
@@ -48,7 +48,7 @@ const ManageAllOrder = () => {
     console.log(id);
     const procide = window.confirm("are You Sure");
     if (procide) {
-      fetch(`https://frozen-mesa-63268.herokuapp.com/order/shiped/${id}`, {
+      fetch(`https://assignment-12-server-ochre.vercel.app/order/shiped/${id}`, {
         method: "PUT",
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,

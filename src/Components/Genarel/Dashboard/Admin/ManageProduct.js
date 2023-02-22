@@ -8,7 +8,7 @@ import Loading from '../../Shared/Loading';
 
 const ManageProduct = () => {
     const { data, isLoading, refetch } = useQuery("AllProducts", () =>
-    fetch(`https://frozen-mesa-63268.herokuapp.com/tools`, {
+    fetch(`https://assignment-12-server-ochre.vercel.app/tools`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -29,7 +29,7 @@ const ManageProduct = () => {
   const deleteProduct = id =>{
   const proced = window.confirm("are You sure you want to delete?")
   if(proced){
-    axios.delete(`https://frozen-mesa-63268.herokuapp.com/tools/delete/${id}`,{
+    axios.delete(`https://assignment-12-server-ochre.vercel.app/tools/delete/${id}`,{
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },

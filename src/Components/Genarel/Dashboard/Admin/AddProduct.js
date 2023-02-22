@@ -19,7 +19,7 @@ const AddProduct = () => {
     };
     console.log(product);
 
-    fetch("https://frozen-mesa-63268.herokuapp.com/tools", {
+    fetch("https://assignment-12-server-ochre.vercel.app/tools", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
